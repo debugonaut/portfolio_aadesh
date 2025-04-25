@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scientific Calculator - C Project</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    body {
+      background: #121212;
+      color: #fff;
+      font-family: 'Courier New', monospace;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    h1, h2 {
+      color: #ffb347;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    pre {
+      background: #1e1e1e;
+      color: #dcdcdc;
+      padding: 1.5rem;
+      overflow-x: auto;
+      border-radius: 12px;
+      font-size: 14px;
+    }
+
+    video, img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 1rem;
+    }
+
+    .calculator {
+      max-width: 400px;
+      background: #1e1e1e;
+      padding: 1.5rem;
+      border-radius: 12px;
+    }
+
+    .calculator input, .calculator select, .calculator button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    .calculator button {
+      background: #ffb347;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Scientific Calculator - C Project</h1>
+
+  <!-- ✅ DEMO SECTION -->
+  <section>
+    <h2>Terminal Demo (C Version)</h2>
+    <video controls width="600">
+        <source src="/vcard-personal-portfolio/assets/images/calculator-demo.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      
+  </section>
+
+  <!-- ✅ LIVE CALCULATOR -->
+  <section>
+    <h2>Try It Live (Web Version)</h2>
+    <div class="calculator">
+      <input type="number" id="num1" placeholder="First Number">
+      <input type="number" id="num2" placeholder="Second Number (optional)">
+      
+      <select id="operation">
+        <option value="add">Add</option>
+        <option value="sub">Subtract</option>
+        <option value="mul">Multiply</option>
+        <option value="div">Divide</option>
+        <option value="pow">Power</option>
+        <option value="sqrt">Square Root (uses only first number)</option>
+      </select>
+
+      <button onclick="calculate()">Calculate</button>
+      <p id="result">Result will appear here</p>
+    </div>
+  </section>
+
+  <!-- ✅ C CODE SECTION -->
+  <section>
+    <h2>Source Code (C)</h2>
+    <pre>
+#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+int main() {
+    int choice;
+    double num1, num2;
+
+    printf("1. Add\n2. Subtract\n3. Multiply\n4. Divide\n5. Power\n6. Square Root\n");
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
+
+    if (choice == 6) {
+        printf("Enter number: ");
+        scanf("%lf", &num1);
+        printf("Result: %.2lf\n", sqrt(num1));
+    } else {
+        printf("Enter two numbers: ");
+        scanf("%lf %lf", &num1, &num2);
+
+        switch (choice) {
+            case 1: printf("Result: %.2lf\n", num1 + num2); break;
+            case 2: printf("Result: %.2lf\n", num1 - num2); break;
+            case 3: printf("Result: %.2lf\n", num1 * num2); break;
+            case 4:
+                if (num2 != 0) printf("Result: %.2lf\n", num1 / num2);
+                else printf("Error: Division by zero\n");
+                break;
+            case 5: printf("Result: %.2lf\n", pow(num1, num2)); break;
+            default: printf("Invalid choice\n");
+        }
+    }
+
+    return 0;
+}
+    </pre>
+    <a href="../assets/code/calculator.c" download="Scientific-Calculator.c" style="padding: 10px 20px; background: #333; color: white; border-radius: 8px; text-decoration: none;">
+      ⬇️ Download Source Code
+    </a>
+    
+  </section>
+
+  <script>
+    function calculate() {
+      const num1 = parseFloat(document.getElementById("num1").value);
+      const num2 = parseFloat(document.getElementById("num2").value);
+      const operation = document.getElementById("operation").value;
+      const resultEl = document.getElementById("result");
+
+      let result;
+      switch(operation) {
+        case "add": result = num1 + num2; break;
+        case "sub": result = num1 - num2; break;
+        case "mul": result = num1 * num2; break;
+        case "div": result = num2 !== 0 ? num1 / num2 : "Error: Division by zero"; break;
+        case "pow": result = Math.pow(num1, num2); break;
+        case "sqrt": result = Math.sqrt(num1); break;
+      }
+
+      resultEl.textContent = `Result: ${result}`;
+    }
+  </script>
+
+</body>
+</html>

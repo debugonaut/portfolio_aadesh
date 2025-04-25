@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../restaurant/restaurant-website"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "portfoliowebsite"
+	}
+}
